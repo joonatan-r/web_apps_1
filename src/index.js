@@ -81,6 +81,9 @@ function checkForWin() {
 
 for (let i = 0; i < BOARD_SIZE; i++) {
   const tr = document.createElement("tr");
+
+  if (boardElement === null) alert("table is null!");
+
   boardElement.appendChild(tr);
   board.push([]);
 
@@ -92,13 +95,16 @@ for (let i = 0; i < BOARD_SIZE; i++) {
 
       td.innerHTML = turn;
       board[i][j] = turn;
+      gameOver = checkForWin();
 
-      if ((gameOver = checkForWin()))
-        alert("Player " + turnToPlayer[turn] + " won!");
+      if (gameOver) alert("Player " + turnToPlayer[turn] + " won!");
 
       turn = turn === "x" ? "o" : "x";
       turnTeller.innerText = "Turn of player " + turnToPlayer[turn];
     };
+
+    if (tr === null) alert("row is null!");
+
     tr.appendChild(td);
     board[i].push([]);
     board[i][j] = "";
